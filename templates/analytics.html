@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Detection Analytics</h2>
+
+<div class="row">
+
+<div class="col-md-6 mb-4">
+
+<div class="stat-card">
+
+<h5>Fall Distribution</h5>
+
+<canvas id="pieChart"></canvas>
+
+</div>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<div class="stat-card">
+
+<h5>Detection Comparison</h5>
+
+<canvas id="barChart"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-12">
+
+<div class="stat-card">
+
+<h5>Fall Detection Trend</h5>
+
+<canvas id="lineChart"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+var fall={{fall}};
+var nofall={{nofall}};
+
+
+// PIE CHART
+
+new Chart(document.getElementById("pieChart"),{
+
+type:"pie",
+
+data:{
+labels:["Fall Detected","No Fall"],
+datasets:[{
+data:[fall,nofall],
+backgroundColor:["#2563EB","#10B981"]
+}]
+}
+
+});
+
+
+// BAR CHART
+
+new Chart(document.getElementById("barChart"),{
+
+type:"bar",
+
+data:{
+labels:["Fall Detected","No Fall"],
+datasets:[{
+data:[fall,nofall],
+backgroundColor:["#2563EB","#10B981"]
+}]
+},
+
+options:{
+plugins:{legend:{display:false}}
+}
+
+});
+
+
+// LINE GRAPH
+
+new Chart(document.getElementById("lineChart"),{
+
+type:"line",
+
+data:{
+
+labels:["1","2","3","4","5"],
+
+datasets:[{
+
+label:"Fall Trend",
+
+data:[fall,nofall,fall,nofall,fall],
+
+borderColor:"#2563EB",
+
+backgroundColor:"rgba(37,99,235,0.1)",
+
+fill:true,
+
+tension:0.3
+
+}]
+
+},
+
+options:{
+responsive:true,
+plugins:{
+legend:{display:true}
+}
+}
+
+});
+
+</script>
+
+{% endblock %}

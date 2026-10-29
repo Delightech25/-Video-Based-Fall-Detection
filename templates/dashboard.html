@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Fall Detection Dashboard</h2>
+
+<div class="row mb-4">
+
+<div class="col-md-4">
+<div class="stat-card text-center">
+<h6>Total Falls</h6>
+<h2 id="fallCount" class="text-primary">{{fall}}</h2>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="stat-card text-center">
+<h6>No Fall</h6>
+<h2 id="safeCount" class="text-success">{{nofall}}</h2>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="stat-card text-center">
+<h6>Total Detections</h6>
+<h2>{{fall + nofall}}</h2>
+</div>
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-6">
+
+<div class="stat-card">
+
+<h5>Fall Distribution</h5>
+
+<canvas id="pieChart"></canvas>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="stat-card">
+
+<h5>Detection Timeline</h5>
+
+<canvas id="lineChart"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+var fall={{fall}};
+var nofall={{nofall}};
+
+new Chart(document.getElementById("pieChart"),{
+type:"pie",
+data:{
+labels:["Fall","No Fall"],
+datasets:[{
+data:[fall,nofall],
+backgroundColor:["#2563EB","#10B981"]
+}]
+}
+});
+
+new Chart(document.getElementById("lineChart"),{
+type:"line",
+data:{
+labels:["1","2","3","4","5"],
+datasets:[{
+label:"Falls",
+data:[fall,nofall,fall,nofall,fall],
+borderColor:"#2563EB",
+fill:false
+}]
+}
+});
+
+/* REAL TIME UPDATE */
+
+setInterval(()=>{
+fetch("/analytics-data")
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("fallCount").innerText=data.fall;
+document.getElementById("safeCount").innerText=data.nofall;
+});
+},5000);
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>AI Fall Detection Login</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#0F172A,#1E293B);
+font-family:system-ui;
+}
+
+.login-card{
+width:420px;
+background:white;
+padding:35px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+.title{
+text-align:center;
+margin-bottom:25px;
+color:#2563EB;
+font-weight:600;
+}
+
+.btn-primary{
+background:#2563EB;
+border:none;
+}
+
+.btn-primary:hover{
+background:#1D4ED8;
+}
+
+.btn-secondary{
+background:#64748B;
+border:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+<h3 class="title">AI Fall Detection</h3>
+
+<form method="POST">
+
+<input type="text"
+name="username"
+class="form-control mb-3"
+placeholder="Username"
+required>
+
+<input type="password"
+name="password"
+class="form-control mb-3"
+placeholder="Password"
+required>
+
+<button class="btn btn-primary w-100 mb-2">
+Login
+</button>
+
+<a href="/register" class="btn btn-secondary w-100">
+Create Account
+</a>
+
+{% if error %}
+
+<div class="alert alert-warning mt-3 text-center">
+{{error}}
+</div>
+{% endif %}
+
+</form>
+
+</div>
+
+</body>
+</html>

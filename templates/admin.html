@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Admin Panel</h2>
+
+<h5>Registered Users</h5>
+
+<div class="stat-card mb-4">
+
+<table class="table">
+
+<tr>
+<th>ID</th>
+<th>Username</th>
+</tr>
+
+{% for u in users %}
+
+<tr>
+<td>{{u[0]}}</td>
+<td>{{u[1]}}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+<h5>Detection Records</h5>
+
+<div class="stat-card">
+
+<table class="table">
+
+<tr>
+<th>ID</th>
+<th>User</th>
+<th>Result</th>
+<th>Timestamp</th>
+<th>Confidence</th>
+<th>Date</th>
+</tr>
+
+{% for d in detections %}
+
+<tr>
+<td>{{d[0]}}</td>
+<td>{{d[1]}}</td>
+<td>{{d[2]}}</td>
+<td>{{d[3]}}</td>
+<td>{{d[4]}}</td>
+<td>{{d[5]}}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

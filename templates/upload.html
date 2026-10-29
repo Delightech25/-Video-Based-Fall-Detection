@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Upload Video Detection</h2>
+
+<div class="stat-card">
+
+<form method="POST" enctype="multipart/form-data">
+
+<input type="file" name="video" class="form-control mb-3" required>
+
+<button class="btn btn-primary">Analyze</button>
+
+<a href="/upload" class="btn btn-warning">Clear</a>
+
+</form>
+
+</div>
+
+{% if processed %}
+
+<div class="stat-card mt-4 text-center">
+
+<h5>Processed Video</h5>
+
+<video width="700" controls>
+<source src="{{ url_for('static', filename='output.mp4') }}">
+</video>
+
+<div class="alert alert-info mt-3">
+
+<h5>{{result}}</h5>
+
+Confidence: {{confidence}}%
+
+</div>
+
+{% if timestamps %}
+
+<h6>Fall Timestamp</h6>
+
+<ul>
+
+{% for t in timestamps %}
+
+<li>{{t}}</li>
+{% endfor %}
+
+</ul>
+
+{% endif %}
+
+<a href="{{ url_for('static', filename='report.csv') }}" class="btn btn-success">
+Download Report
+</a>
+
+{% if result == "Fall Detected" %}
+
+<script>
+showFallAlert();
+</script>
+
+{% endif %}
+
+</div>
+
+{% endif %}
+
+{% endblock %}
