@@ -1,6 +1,5 @@
 # -Video-Based-Fall-Detection
 
-# Video-Based Fall Detection System
 
 A real-time, computer vision-based web application built with **Flask** and **YOLOv8 Pose Estimation** to detect human falls from video uploads.
 
